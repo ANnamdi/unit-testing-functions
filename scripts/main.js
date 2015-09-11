@@ -1,5 +1,5 @@
 'use strict';
-
+var _ = require('lodash')
 /*
  * PROBLEM `checkData`: (normal)
  * Write a function that takes a string and checks to make sure that the string
@@ -9,7 +9,10 @@
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function checkData(inputString) {
-	// your code goes here
+	if (typeof inputString !== 'string') {
+		throw 'Invalid Input'
+	}
+	return inputString.length === 3 // this is a boolean value, it returns true if true.
 }
 
 /*
@@ -19,8 +22,13 @@ function checkData(inputString) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+
 function concatenateArrays(a, b) {
-	// your code goes here
+
+	if ( !_.isArray(a) || !_.isArray(b) ){   //lodash is another name for a bigger library called underscore
+		throw 'Invalid Input'
+	} 
+	return a.concat(b);
 }
 
 /*
@@ -33,7 +41,12 @@ function concatenateArrays(a, b) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function fixProperNoun(noun) {
-	// your code goes here
+	if (!_.isString(noun)){     // if (typeof noun === 'string') is another option
+		throw 'Invalid Input';
+	}
+
+	return noun[0].toUpperCase() + noun.substr(1).toLowerCase();
+
 }
 
 /*
@@ -44,7 +57,11 @@ function fixProperNoun(noun) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function sortLetters(inputString) {
-	// your code goes here
+	if (typeof inputString !== 'string'){
+		throw 'Invalid Input';
+	} 
+	return inputString.split('').sort().join('');
+
 }
 
 /*
@@ -55,7 +72,16 @@ function sortLetters(inputString) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function absVal(integer) {
-	// your code goes here
+ 	if (typeof integer !== 'number'){
+		throw 'Invalid Input';
+	}
+
+	return integer >= 0 ? integer : integer * -1
+	// if(integer >= 0){
+	// 	return integer
+	// } else {
+	// 	return integer*-1
+	// }
 }
 
 /*
@@ -100,6 +126,40 @@ function absVal(integer) {
  * student names and returns an array of randomly selected pairs of students
  * (array of arrays).
  */
+ function studentPairs(studentNames) {
+ 	function getRandomInt(min, max){
+ 		return Math.floor(Math.random() * (max - min + 1)) + min;
+ 	}
+ 	if(!_.isArray(studentNames)) {
+ 		throw 'Invalid input';
+ 	}
+ 	for(var studentNumber = 0; studentNumber < studentNames.length; studentNumber++) {
+ 		var currentStudent = studentNames[studentNumber];
+ 		if(!_.isString(currentStudent)) {
+ 			throw 'Invalid input: student must be a string'
+ 		}
+ 	}
+
+ 	for(var pairNum = 0; pairNum < Math.floor(studentNames.length/2); pairNum++) {
+ 		var studentNumber1 = getRandomInt(0, studentNames.length-1);
+ 		var studentName1 = studentNames.splice(studentNumber1, 1);
+
+ 		var studentNumber2 = getRandomInt(0, studentNames.length-1);
+ 		var studentName2 = studentNames.splice(studentNumber1, 1);
+
+ 		// pairs.push([									/* method 1 */
+ 		//	studentName1[0],
+ 		//	studentName2[0]
+ 		// ]);
+ 		pairs.push(studentName1.concat(studentName2)); /* method 2 */
+ 	}
+
+ 	if(studentNames.length > 0) {
+ 		var pairNumber1 = getRandomInt(0, pairs.length-1);
+ 		pairs[pairNumber].push(studentNames[0]);
+ 	}
+ 	return pairs;
+}
 
 /*
  * PROBLEM `sumSquares`: (normal)
@@ -137,6 +197,7 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+
 
 /*
  * PROBLEM `splitSwap`: (hard)
