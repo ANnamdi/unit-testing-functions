@@ -1,5 +1,5 @@
 'use strict';
-var _ = require('lodash')
+var _ = require('lodash') 
 /*
  * PROBLEM `checkData`: (normal)
  * Write a function that takes a string and checks to make sure that the string
@@ -10,6 +10,7 @@ var _ = require('lodash')
  */
 function checkData(inputString) {
 	if (typeof inputString !== 'string') {
+	// js operator typeof http://mzl.la/1adFxB9. string is a built-in js object http://mzl.la/1APf72e.
 		throw 'Invalid Input'
 	}
 	return inputString.length === 3 // this is a boolean value, it returns true if true.
@@ -25,10 +26,10 @@ function checkData(inputString) {
 
 function concatenateArrays(a, b) {
 
-	if ( !_.isArray(a) || !_.isArray(b) ){   //lodash is another name for a bigger library called underscore
+	if ( !_.isArray(a) || !_.isArray(b) ){   //lodash is a version for a bigger library called underscore.
 		throw 'Invalid Input'
 	} 
-	return a.concat(b);
+	return a.concat(b); // Here the array method .concat is used (See http://mzl.la/1eVzgwK).
 }
 
 /*
@@ -41,11 +42,13 @@ function concatenateArrays(a, b) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function fixProperNoun(noun) {
-	if (!_.isString(noun)){     // if (typeof noun === 'string') is another option
+	if (!_.isString(noun)){     // if (typeof noun === 'string') is another option. 
 		throw 'Invalid Input';
 	}
 
-	return noun[0].toUpperCase() + noun.substr(1).toLowerCase();
+	return noun[0].toUpperCase() + noun.substr(1).toLowerCase(); 
+	// the toUpperCase and toLowerCase methods are pretty straight forward. See http://mzl.la/1OO231Z.
+	// See http://mzl.la/1c38kXV for substr(), with this method we can return the sub string section after index 1 of the string.
 
 }
 
@@ -57,7 +60,7 @@ function fixProperNoun(noun) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function sortLetters(inputString) {
-	if (typeof inputString !== 'string'){
+	if (typeof inputString !== 'string'){  
 		throw 'Invalid Input';
 	} 
 	return inputString.split('').sort().join('');
@@ -77,7 +80,8 @@ function absVal(integer) {
 	}
 
 	return integer >= 0 ? integer : integer * -1
-	// if(integer >= 0){
+
+	// if(integer >= 0){           this is another way to solve problem.
 	// 	return integer
 	// } else {
 	// 	return integer*-1
@@ -92,6 +96,24 @@ function absVal(integer) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 
+ function myMin(a,b){
+ 	//take the smaller of 2
+ 	if( typeof a !== 'number' || typeof b !== 'number' ){
+ 		throw 'Invalid Input'
+ 	}
+
+ 	return Math.min(a,b);     //Here is the first of three ways of returning appropriate response.
+
+ 	// return a <= b ? a : b 
+ 
+ 	// if(a <= b){
+ 	// 	return a;
+ 	// } else {
+ 	//	return b;
+ 	// }
+
+ }
+
 /*
  * PROBLEM `myMax`: (normal) - Actual Interview Question
  * Write a function called `myMax` that takes an array of integers ans returns
@@ -101,7 +123,29 @@ function absVal(integer) {
  *
  * Insane mode: do this without using a for loop.
  */
+ 	function myMax(integerArray){
+ 		if( !_.isArray(integerArray) ){
+ 		throw 'Invalid Input'
 
+	    var args = [];
+	    for (var i = 0; i < arguments.length; i++)
+	        args[i] = arguments[i];
+	    var argsSorted= args.sort();
+		}
+
+
+	 	return argsSorted.Math.max; 
+ 		// var numInArray = integerArray.length
+ 		// if(i=0; i<numInArray; i++){
+
+ 		// }
+ 	}
+
+
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 /*
  * PROBLEM `getMonth`: (normal)
  * Write a function called `getMonth` that maps a given integer to a month.
@@ -113,12 +157,33 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+function getMonth(monthId){
+	if (!monthId || !isNumeric(monthId) || monthId < 1 || monthId > 12){
+		throw new Error('Invalid Input'); // second method of throwing error
+	}
+	var monthsArray = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	return monthsArray[monthId-1];
+}
+
+
+
 
 /*
  * PROBLEM `randomElement`: (normal)
  * Create a function called `randomElement` that takes an array of values and
  * returns one randomly selected value from that array.
  */
+function randomElement(arrayOfValues){
+	if(!_.isArray(arrayOfValues)){
+		throw new Error('Invalid Input');
+	}
+	var max = arrayOfValues.length;
+	var randomVal = Math.random() * max; 
+	var integerVal = Math.floor(randomVal);
+	return arrayOfValues[integerVal];
+}
+
+
 
 /*
  * PROBLEM `studentPairs`: (normal)
@@ -166,8 +231,20 @@ function absVal(integer) {
  * Write a function called `sumSquares` that returns the sum of squares of all
  * integers from 1 up to and including a given positive, non-zero integer N.
  *
- * If the input is invalid throw an 'Invalid Input' exception.
+ * If the input is invalid throw an 'Invalid Input' exception. // error is better used in place of exception, when dealing with js
  */
+ 	function sumSquares(N){
+ 		if (!N || typeof N !== "number" || N < 1 || N%1 !== 0){
+ 			throw "Invalid Input";
+ 		}
+ 		var result = 0;
+ 		for(var i = 1; i <= N; i++){
+ 			var squared = Math.pow(i,i); 
+ 			// Math.pow(base,exponent   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
+ 			result += squared;
+ 		}
+ 		return result;
+ 	}
 
 /* 
  * PROBLEM `findMaxDiff`: (normal)
@@ -176,6 +253,24 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+  function findMaxDiff(arr){
+  // First we want to make sure our argument is an array, and each item in the array is a number. 
+  	if( !_.isArray(arr) || _.some(arr,function(item){   // .some returns true if any of the given iterations returns true.
+  		return typeof item !== "number"; 
+  	}) || arr.length < 2 ){
+  		throw "Invalid Input";
+  	}
+  	// We want to iterate over each difference and check if the newer difference is more than the last iteration. At the end we will result in the largest difference.
+  	var max = 0;
+
+  	for(var i = 1; i < arr.length; i++){
+  		var diff = Math.abs(arr[i-1] - arr[i]);
+  		max = (diff > max) ? diff : max ; // an alternative to using an if statement.
+  		// if(diff > max) max = diff;    --> the braces are OPTIONAL with an if statement, but you're only allowed one line of code without use of braces.
+  	}
+  	return max;
+
+}
 
 /*
  * PROBLEM `insertDashes`: (normal)
@@ -185,6 +280,47 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+ function insertDashes(str){
+ 	/*
+ 	if( s === null || s === undefined || typeof s !== 'string'){
+ 		throw 'Invalid Input';
+ 	}
+ 
+ 	var sOut = '';
+ 	for(var i = 0; i < s.length; i++){
+ 		var c = s[i];
+ 		if( c == ' '){
+ 			sOut += c;
+ 		} else{
+ 			if( i == s.length-1 || s[i+1] == ' '){
+ 				sOut += c;
+ 			} else{
+ 				sOut += c + "-";
+ 			}
+ 		}
+
+ 	}
+ 	console.log(sOut);
+ 	return sOut;
+ */ 
+
+ // alternative A above (if function parameter is s)
+ // alternative B below (if function parameter is str)
+
+  	if( str === null || str === undefined || typeof str !== 'string'){
+ 		throw 'Invalid Input';
+ 	}
+	var strOut = '';
+	var strWords = str.split(' ');
+	
+	var strWords2 = [];
+	strWords.forEach(function (word) {
+	    strWords2.push(word.split('').join('-'));
+	});
+	var strOut = strWords2.join(' ');
+	return strOut;
+}
+
 
 /*
  * PROBLEM `mySubstring`: (normal)
@@ -198,6 +334,13 @@ function absVal(integer) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 
+ function mySubstring(str,startIndex,endIndex){
+ 	if( arguments.length < 3 ){
+ 		throw 'Invalid Input';
+ 	}
+ 	// return str.substr(startIndex,endIndex-startIndex+1);  // --> alternative solution
+ 	return str.slice(startIndex,endIndex+1); // --> alternative solution #2- slice vs substr article: http://bit.ly/1AByryJ 
+ }
 
 /*
  * PROBLEM `splitSwap`: (hard)
