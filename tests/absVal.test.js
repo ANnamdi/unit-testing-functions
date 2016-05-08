@@ -1,3 +1,4 @@
+// NOTE: to run this unit test run 'mocha tests/absVal.test.js' in your Terminal.'
 'use strict';
 var expect = require('chai').expect;
 var functions = require('../scripts/main.js');
